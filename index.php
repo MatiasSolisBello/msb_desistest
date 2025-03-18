@@ -21,14 +21,14 @@
                 <div class="col">
                     <label for="nombre">Nombre</label>
                     <input type="text" class="form-control" 
-                    id="nombre" name="nombre">
+                    id="nombre_producto" name="nombre_producto">
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label for="bodega">Bodega</label>
                     <select id="bodega" name="bodega" class="form-control">
-                        <option value="">Seleccione una bodega</option>
+                        <option value=""></option>
                         <?php
                             require 'database.php';
                             $query = "SELECT id, nombre FROM bodega";

@@ -1,8 +1,6 @@
 $(document).ready(function () {
-    console.log("ready!");
     $("#bodega").change(function () {
         let bodegaID = $(this).val();
-        console.log("bodegaID_ " + bodegaID);
         if (bodegaID) {
             $.ajax({
                 type: "POST",
@@ -16,13 +14,25 @@ $(document).ready(function () {
                     });
                 }
             });
-        } else {
-            $("#sucursal").html('<option value="">Seleccione una bodega primero</option>');
         }
     });
 
-
-
+    $("#codigo").change(function () {
+        let codigo = $(this).val();
+        if (codigo) {
+            $.ajax({
+                type: "POST",
+                url: "validar_codigo.php",
+                data: { codigo: codigo },
+                success: function (data) {
+                    if (data == "true") {
+                        alert('El código del producto ya existe en la base de datos.');
+                        $('#codigo').val('');
+                    }
+                }
+            });
+        }
+    });
 
     $('#producto-form').submit(function (e) {
         e.preventDefault();
@@ -48,7 +58,7 @@ $(document).ready(function () {
 
 
         // Nombre: Obligatorio, longitud mínima de 2 y máxima de 50 caracteres
-        nombre = $('#nombre').val();
+        nombre = $('#nombre_producto').val();
         if (nombre == null || nombre == "") {
             alert('El nombre del producto no puede estar en blanco.');
             return;
@@ -57,7 +67,6 @@ $(document).ready(function () {
             alert('El nombre del producto debe tener entre 2 y 50 caracteres.');
             return;
         }
-
         
         // precio: Obligatorio, formato de número positivo con hasta dos decimales
         precio = $('#precio').val();
@@ -131,9 +140,8 @@ $(document).ready(function () {
             url: "guardar_producto.php",
             data: data,
             success: function (response) {
-                console.log(response);
                 alert('Producto guardado correctamente');
-                //$('#producto-form').trigger('reset');
+                $('#producto-form').trigger('reset');
             }
         });
     });
