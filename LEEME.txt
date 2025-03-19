@@ -1,9 +1,9 @@
 Instrucciones
 * Instalar XAMPP y activar servicios "Apache" y "MySQL"
-* Copiar o clonar el reporitorio en la carpeta "C:\xampp\htdocs\nombre_proyecto"
+* Copiar o clonar el reporitorio en la carpeta "C:\xampp\htdocs\productos"
 * En MySQL, crea la base de datos productos
 * En importar, selecciona productos.sql
-* Escribe en tu navegador "localhost/nombre_proyecto"
+* Escribe en tu navegador "localhost/productos"
 
 Version PHP: 8.0
 Base de datos: MySQL
