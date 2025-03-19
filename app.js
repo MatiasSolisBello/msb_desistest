@@ -24,11 +24,14 @@ $(document).ready(function () {
                 type: "POST",
                 url: "validar_codigo.php",
                 data: { codigo: codigo },
-                success: function (data) {
-                    if (data == "true") {
+                success: function (response, data) {
+                    if (response) {
+                        console.log(response);
                         alert('El código del producto ya existe en la base de datos.');
                         $('#codigo').val('');
                     }
+                    console.log(response);
+                    console.log(data);
                 }
             });
         }
