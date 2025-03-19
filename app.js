@@ -19,32 +19,6 @@ $(document).ready(function () {
 
     $("#codigo").change(function () {
         let codigo = $(this).val();
-        if (codigo) {
-            $.ajax({
-                type: "POST",
-                url: "validar_codigo.php",
-                data: { codigo: codigo },
-                success: function (response, data) {
-                    if (response) {
-                        console.log(response);
-                        alert('El código del producto ya existe en la base de datos.');
-                        $('#codigo').val('');
-                    }
-                    console.log(response);
-                    console.log(data);
-                }
-            });
-        }
-    });
-
-    $('#producto-form').submit(function (e) {
-        e.preventDefault();
-        var material = [];
-
-        // Codigo: Obligatorio, formato específico (letras, números), 
-        // longitud mínima de 5 y máxima de 15 caracteres.
-        // Debe ser único y verificado en la base de datos
-        codigo = $('#codigo').val()
         if (codigo == null || codigo == "") {
             alert('El código del producto no puede estar en blanco.');
             return;
@@ -59,6 +33,25 @@ $(document).ready(function () {
             return false;
         }
 
+        if (codigo) {
+            $.ajax({
+                type: "POST",
+                url: "validar_codigo.php",
+                data: { codigo: codigo },
+                success: function (response) {
+                    if (response) {
+                        alert('El código del producto ya existe en la base de datos.');
+                        $('#codigo').val('');
+                    }
+                }
+            });
+        }
+    });
+
+    $('#producto-form').submit(function (e) {
+        e.preventDefault();
+        var material = [];
+        codigo = $('#codigo').val();
 
         // Nombre: Obligatorio, longitud mínima de 2 y máxima de 50 caracteres
         nombre = $('#nombre_producto').val();
